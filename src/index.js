@@ -1,7 +1,7 @@
 import getWord from "./domain/getWord"
 import newAhorcado from "./domain/newAhorcado"
 import newPresenter from "./domain/newPresenter"
-import view from "./view";
+import UserInterfaceReactImpl from "./UserInterfaceReactImpl";
 
 function InitGame() {
   const secretWord = getWord()
@@ -9,6 +9,7 @@ function InitGame() {
     secretWord,
     shouldGameOverWhenFailsEquals: 5
   })
+  const view = UserInterfaceReactImpl()
   const presenter = newPresenter(view, InitGame);
   presenter.whenUserAttemptsToGuessLetter(letter => game.tryLetter(letter, presenter))
   game.render(presenter)

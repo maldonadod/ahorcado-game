@@ -23,7 +23,7 @@ function newAhorcado({ secretWord, shouldGameOverWhenFailsEquals = 5 }) {
             placeholders
           })
         } else {
-          presenter.showWinningGame()
+          presenter.showWinningGame(secretWord)
         }
 
       } else {

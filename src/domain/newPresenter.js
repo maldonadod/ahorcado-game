@@ -1,31 +1,29 @@
 function newPresenter(view, startGame) {
   let callbacks = []
-  function dispatchInputLetter(letter) {
-    if (letter.trim() === "") return;
-    callbacks.forEach(cb => cb(letter))
-  }
-  function listener(e) {
-    dispatchInputLetter(e.key)
-  }
-  document.addEventListener("keypress", listener)
-  return {
+  let dettach;
+  const presenter = {
     whenUserAttemptsToGuessLetter(callback) {
       callbacks = [...callbacks, callback]
     },
     showGame(game) {
       view.showGame(game, this)
     },
-    showWinningGame() {
-      view.showWinningGame(this)
+    showWinningGame(secretWord) {
+      view.showWinningGame(this, secretWord)
     },
     showGameOver(secretWord) {
-      document.removeEventListener("keypress", listener)
       view.showGameOver(this, secretWord)
+      dettach()
     },
     restartGame() {
       startGame()
     },
-    dispatchInputLetter,
+    dispatchInputLetter(letter) {
+      if (letter.trim() === "") return;
+      callbacks.forEach(cb => cb(letter))
+    },
   }
+  dettach = view.attach(presenter)
+  return presenter
 }
 module.exports = newPresenter;
