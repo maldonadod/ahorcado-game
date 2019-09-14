@@ -1,6 +1,7 @@
-function newPresenter(view, startGame) {
+function newPresenter(view) {
   let callbacks = []
   let dettach;
+  let startGameCommand = () => {}
   const presenter = {
     whenUserAttemptsToGuessLetter(callback) {
       callbacks = [...callbacks, callback]
@@ -16,11 +17,14 @@ function newPresenter(view, startGame) {
       dettach()
     },
     restartGame() {
-      startGame()
+      startGameCommand()
     },
     dispatchInputLetter(letter) {
       if (letter.trim() === "") return;
       callbacks.forEach(cb => cb(letter))
+    },
+    whenUserRequestNewGame(initNewGame) {
+      startGameCommand = initNewGame
     },
   }
   dettach = view.attach(presenter)

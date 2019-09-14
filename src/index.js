@@ -10,7 +10,8 @@ function InitGame() {
     shouldGameOverWhenFailsEquals: 5
   })
   const view = UserInterfaceReactImpl()
-  const presenter = newPresenter(view, InitGame);
+  const presenter = newPresenter(view);
+  presenter.whenUserRequestNewGame(() => InitGame())
   presenter.whenUserAttemptsToGuessLetter(letter => game.tryLetter(letter, presenter))
   game.render(presenter)
 }
