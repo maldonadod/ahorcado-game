@@ -1,0 +1,47 @@
+body {
+  background-color: black;
+}
+.game-container {
+  color: white;
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+  text-align: center;
+  justify-content: center;
+  font-size: 100px;
+}
+.game-container .fallos {
+  font-size: 50px;
+}
+.game-container .play-again-button {
+  padding: 10px;
+  background-color: blue;
+  border: none;
+  width: 300px;
+  height: 100px;
+  font-size: 25px;
+  color: white;
+  border-radius: 10px;
+  outline: none;
+}
+.game-container .play-again-button:hover {
+ cursor: pointer;
+ animation-duration: 1s;
+ animation-name: desplazar;
+ animation-fill-mode: forwards;
+}
+
+@keyframes desplazar {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(5px);
+    scale: 10px;
+  }
+  100% {
+    transform: translateY(0px);
+    scale: 0px;
+    background-color: green;
+  }
+}

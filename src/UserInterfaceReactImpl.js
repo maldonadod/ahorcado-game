@@ -16,31 +16,40 @@ function toFail(failingLetter, i) {
     <span className="failing-letter" key={i}>{failingLetter}</span>
   )
 }
+function GameContainer({children}) {
+  return (
+    <div className="game-container">
+      {children}
+    </div>
+  )
+}
 function Game({ fails, placeholders }) {
   return (
-    <div>
+    <GameContainer>
       <section>
-        <h3>Failing letters: [{fails.map(toFail)}]</h3>
+        {placeholders.map(toPlaceHolder)}
+        <p className="fallos">
+          {fails.map(toFail)}
+        </p>
       </section>
-      {placeholders.map(toPlaceHolder)}
-    </div>
+    </GameContainer>
+  )
+}
+function FinalFeedback({ message, presenter, secretWord }) {
+  return (
+    <GameContainer>
+      <div>
+        <p>{message}!! La palabra es: {secretWord}</p>
+        <button className="play-again-button" onClick={() => presenter.restartGame()}>Jugar de nuevo</button>
+      </div>
+    </GameContainer>
   )
 }
 function WinningGame({ presenter, secretWord }) {
-  return (
-    <div>
-      <h2>YOU WON, THE WORD WAS: {secretWord}</h2>
-      <button onClick={() => presenter.restartGame()}>Play Again</button>
-    </div>
-  )
+  return <FinalFeedback presenter={presenter} secretWord={secretWord} message="Ganaste" />
 }
 function GameOver({ presenter, secretWord }) {
-  return (
-    <div>
-      <h2>YOU LOOSE, THE WORD WAS: {secretWord}</h2>
-      <button onClick={() => presenter.restartGame()}>Play Again</button>
-    </div>
-  )
+  return <FinalFeedback presenter={presenter} secretWord={secretWord} message="Perdiste" />
 }
 function UserInterfaceReactImpl() {
   return {
