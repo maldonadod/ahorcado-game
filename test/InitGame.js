@@ -3,6 +3,7 @@ const newPresenter = require("../src/domain/newPresenter");
 
 function InitGame(params) {
   const view = {
+    attach: jest.fn(() => jest.fn()),
     showGame: jest.fn(),
     showWinningGame: jest.fn(),
     showGameOver: jest.fn(),
