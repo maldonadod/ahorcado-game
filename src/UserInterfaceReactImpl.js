@@ -39,17 +39,18 @@ function FinalFeedback({ message, presenter, secretWord }) {
   return (
     <GameContainer>
       <div>
-        <p>{message}!! La palabra es: {secretWord}</p>
+        <p>{message}</p>
+        <p>La palabra es: {secretWord}</p>
         <button className="play-again-button" onClick={() => presenter.restartGame()}>Jugar de nuevo</button>
       </div>
     </GameContainer>
   )
 }
 function WinningGame({ presenter, secretWord }) {
-  return <FinalFeedback presenter={presenter} secretWord={secretWord} message="Ganaste" />
+  return <FinalFeedback presenter={presenter} secretWord={secretWord} message="Ganaste 😼" />
 }
 function GameOver({ presenter, secretWord }) {
-  return <FinalFeedback presenter={presenter} secretWord={secretWord} message="Perdiste" />
+  return <FinalFeedback presenter={presenter} secretWord={secretWord} message="Perdiste 😾" />
 }
 function UserInterfaceReactImpl() {
   return {
