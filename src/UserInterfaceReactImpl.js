@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import './index.css'
+import abecedario from "./abecedario"
 
 function render(view) {
   ReactDOM.render(view, document.getElementById('root'));
@@ -11,11 +12,6 @@ function toPlaceHolder(placeholder, i) {
     <span className="placeholder" key={i}>{placeholder}</span>
   )
 }
-function toFail(failingLetter, i) {
-  return (
-    <span className="failing-letter" key={i}>{failingLetter}</span>
-  )
-}
 function GameContainer({children}) {
   return (
     <div className="game-container">
@@ -23,17 +19,26 @@ function GameContainer({children}) {
     </div>
   )
 }
-function Game({ fails, placeholders }) {
+function Game({ fails, placeholders, dispatchInputLetter }) {
   return (
     <GameContainer>
       <section>
         {placeholders.map(toPlaceHolder)}
-        <p className="fallos">
-          {fails.map(toFail)}
-        </p>
+      </section>
+      <section>
+        {abecedario.map(toUpperCase).map((letter, index) => (
+          <button
+            onClick={() => dispatchInputLetter(letter)}
+            className={fails.includes(letter) ? "letter-block disabled" : placeholders.includes(letter) ? "letter-block active" : "letter-block"}
+            key={index}
+          >{letter}</button>
+        ))}
       </section>
     </GameContainer>
   )
+}
+function toUpperCase(letter) {
+  return letter.toUpperCase()
 }
 function FinalFeedback({ message, presenter, secretWord }) {
   return (
@@ -53,18 +58,17 @@ function GameOver({ presenter, secretWord }) {
   return <FinalFeedback presenter={presenter} secretWord={secretWord} message="Perdiste 😾" />
 }
 function UserInterfaceReactImpl() {
+  let presenterInstance;
   return {
     attach(presenter) {
-      function listener(e) {
-        presenter.dispatchInputLetter(e.key)
-      }
-      document.addEventListener("keypress", listener)
-      return () => {
-        document.removeEventListener("keypress", listener)
-      }
+      presenterInstance = presenter;
+      return () => {}
     },
     showGame(game) {
-      render(<Game fails={game.fails} placeholders={game.placeholders} />)
+      render(<Game
+        fails={game.fails}
+        placeholders={game.placeholders}
+        dispatchInputLetter={(letter) => presenterInstance.dispatchInputLetter(letter)} />)
     },
     showWinningGame(presenter, secretWord) {
       render(<WinningGame secretWord={secretWord} presenter={presenter} />)
