@@ -30,4 +30,4 @@ function newPresenter(view) {
   dettach = view.attach(presenter)
   return presenter
 }
-module.exports = newPresenter;
+export default newPresenter;

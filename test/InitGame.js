@@ -1,5 +1,5 @@
-const newAhorcado = require("../src/domain/newAhorcado");
-const newPresenter = require("../src/domain/newPresenter");
+import newAhorcado from "../src/domain/newAhorcado";
+import newPresenter from "../src/domain/newPresenter";
 
 function InitGame(params) {
   const view = {

@@ -41,4 +41,4 @@ function newAhorcado({ secretWord, shouldGameOverWhenFailsEquals = 5 }) {
     }
   }
 }
-module.exports = newAhorcado;
+export default newAhorcado;
