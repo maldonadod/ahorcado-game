@@ -56,6 +56,9 @@ body {
   font-size: 15px;
   pointer-events: none;
 }
+.placeholder {
+  margin-right: 20px;
+}
 
 @keyframes desplazar {
   0% {

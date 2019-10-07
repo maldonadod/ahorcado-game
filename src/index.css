@@ -11,11 +11,3 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
-
-.placeholder {
-  margin-right: 20px;
-}
-.failing-letter {
-  color: red;
-  font-weight: bold;
-}
