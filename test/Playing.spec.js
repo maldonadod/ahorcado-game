@@ -1,6 +1,6 @@
 const InitGame = require("./InitGame");
 
-test("show a in placeholders", test4)
+test("asd", test4)
 test("asd", test5)
 test("asd", test6)
 test("asd", test7)
@@ -12,7 +12,7 @@ function test4() {
     
     presenter.dispatchInputLetter("A")
 
-		expect(view.showGame).lastCalledWith({
+    expect(view.showGame).toHaveBeenCalledWith({
       fails: [],
       placeholders: ["_", "A", "_", "_"]
     }, presenter)
