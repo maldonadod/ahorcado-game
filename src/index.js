@@ -12,7 +12,7 @@ function InitGame() {
   const view = UserInterfaceReactImpl()
   const presenter = newPresenter(view);
   presenter.whenUserRequestNewGame(() => InitGame())
-  presenter.whenUserAttemptsToGuessLetter(letter => game.tryLetter(letter, presenter))
+  presenter.whenUserAttemptsToGuessLetter(letter => game.tryLetter(letter).render(presenter))
   game.render(presenter)
 }
 

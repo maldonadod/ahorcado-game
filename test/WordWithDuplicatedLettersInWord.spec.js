@@ -1,6 +1,6 @@
 const InitGame = require("./InitGame");
 
-test("Game should provide placeholders equals to the amount of letters of the secret word", testGameStarts)
+test.only("Game should provide placeholders equals to the amount of letters of the secret word", testGameStarts)
 
 function testGameStarts() {
 
