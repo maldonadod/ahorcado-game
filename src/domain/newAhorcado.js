@@ -14,10 +14,7 @@ function newAhorcado({ secretWord, shouldGameOverWhenFailsEquals = 5 }) {
 			} else if (!word.placeholders.includes(PLACEHOLDER_SYMBOL)) {
 				presenter.showWinningGame(secretWord)
 			} else {
-				presenter.showGame({
-					placeholders: word.placeholders,
-					fails: word.fails,
-				})
+				word.render(presenter)
 			}
     }
   }

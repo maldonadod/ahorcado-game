@@ -4,15 +4,16 @@ class SecretWord {
 		this.placeholderSymbol = placeholderSymbol
 		this.fails = fails
 		this.uncoverLetters = uncoverLetters
-		this.toPlaceholderOrLetter = letter => 
-			this.uncoverLetters.includes(letter)
+		function toPlaceholderOrLetter(letter) {
+			return uncoverLetters.includes(letter)
 				? letter
-				: this.placeholderSymbol
-		this.placeholders = letters(this.word).map(this.toPlaceholderOrLetter)
+				: placeholderSymbol
+		}
+		this.placeholders = letters(this.word).map(toPlaceholderOrLetter)
 	}
 	render(presenter) {
 		presenter.showGame({
-			placeholders: letters(this.word).map(this.toPlaceholderOrLetter),
+			placeholders: this.placeholders,
 			fails: this.fails
 		})
 	}
