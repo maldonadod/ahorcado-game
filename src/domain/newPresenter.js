@@ -1,7 +1,7 @@
 function newPresenter(view) {
   let dispatchInputLetterCallback;
   let dettach;
-  let startGameCommand = () => {}
+  let startGameCommand = () => { }
   const presenter = {
     whenUserAttemptsToGuessLetter(callback) {
       dispatchInputLetterCallback = callback

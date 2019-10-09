@@ -1,43 +1,21 @@
-const replaceLetterInPlaceholders = require("./replaceLetterInPlaceholders")
+const SecretWord = require("./SecretWord")
+const PLACEHOLDER_SYMBOL = "_"
 
 function newAhorcado({ secretWord, shouldGameOverWhenFailsEquals = 5 }) {
-  const letters = secretWord.split("").map(letter => letter.toUpperCase())
-  let placeholders = letters.map(_ => "_")
-  let fails = []
+	let word = new SecretWord(secretWord, PLACEHOLDER_SYMBOL)
   return {
     render(presenter) {
-      presenter.showGame({
-        fails,
-        placeholders
-      })
+			word.render(presenter)
     },
     tryLetter(letter, presenter) {
-      letter = letter.toUpperCase()
-      const index = letters.findIndex(l => l === letter);
-      if (index >= 0) {
-        placeholders = replaceLetterInPlaceholders(letters, placeholders, letter);
-
-        if (placeholders.includes("_")) {
-          presenter.showGame({
-            fails,
-            placeholders
-          })
-        } else {
-          presenter.showWinningGame(secretWord)
-        }
-
-      } else {
-        fails = [...fails, letter]
-
-        if (fails.length === shouldGameOverWhenFailsEquals) {
-          presenter.showGameOver(secretWord)
-        } else {
-          presenter.showGame({
-            fails,
-            placeholders
-          })
-        }
-      }
+			word = word.tryLetter(letter)
+			if (word.fails.length === shouldGameOverWhenFailsEquals) {
+				presenter.showGameOver(secretWord)
+			} else if (!word.placeholders.includes(PLACEHOLDER_SYMBOL)) {
+				presenter.showWinningGame(secretWord)
+			} else {
+				word.render(presenter)
+			}
     }
   }
 }
